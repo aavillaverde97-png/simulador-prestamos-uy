@@ -229,7 +229,7 @@ function opts(n){
     ivaInt:$('ivaInt').checked,comFin:$('comFin').checked};
 }
 
-function render(){
+function render(save=true){
   const cur=radio('cur'), usd=cur==='USD', fx=num('fx'), inc=num('inc')||15;
   const n=Math.min(360,Math.max(1,Math.round(num('n'))||1));
   const toUYU=v=>usd?v*fx:v;
@@ -264,7 +264,7 @@ function render(){
   }).join('');
 
   if($('det').open) renderCrono();
-  saveUrl();
+  if(save) saveUrl();
 }
 
 function renderCrono(){
@@ -315,7 +315,7 @@ $('csv').addEventListener('click',()=>{
   a.href=URL.createObjectURL(new Blob(['﻿'+lines.join('\n')],{type:'text/csv'}));
   a.download='cronograma-prestamo.csv';a.click();URL.revokeObjectURL(a.href);
 });
-loadUrl();render();
+loadUrl();render(false);
 </script>
 </body>
 </html>
