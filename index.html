@@ -230,10 +230,10 @@ function opts(n){
 }
 
 function render(save=true){
-  const cur=radio('cur'), usd=cur==='USD', fx=num('fx'), inc=num('inc')||15;
+  const usd=radio('cur')==='USD', cur=usd?'USD':'$U', fx=num('fx'), inc=num('inc')||15;
   const n=Math.min(360,Math.max(1,Math.round(num('n'))||1));
   const toUYU=v=>usd?v*fx:v;
-  document.querySelectorAll('.cur').forEach(e=>e.textContent=cur==='USD'?'USD':'$U');
+  document.querySelectorAll('.cur').forEach(e=>e.textContent=cur);
   document.querySelectorAll('.usd-only').forEach(e=>e.classList.toggle('hide',!usd));
   $('teaOut').textContent=fmt(num('tea'))+'%';
 
