@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="es-UY">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simulador de Préstamos Uruguay – Cuota, TEA y Costo Real</title>
+<meta name="description" content="Simulá tu préstamo en Uruguay en dólares o pesos: cuota mensual, cronograma completo y costo financiero total con comisión, IVA y seguro. Sistema francés, alemán y americano. Gratis y sin registro.">
+<link rel="canonical" href="https://aavillaverde97-png.github.io/simulador-prestamos-uy/">
+<meta name="robots" content="index,follow,max-snippet:-1">
+<meta name="theme-color" content="#0b6b50">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_UY">
+<meta property="og:title" content="Simulador de Préstamos Uruguay – Cuota, TEA y Costo Real">
+<meta property="og:description" content="Calculá la cuota y el costo real de tu préstamo automotor o personal en USD o pesos uruguayos, con comisión, IVA y seguro incluidos.">
+<meta property="og:url" content="https://aavillaverde97-png.github.io/simulador-prestamos-uy/">
+<meta property="og:image" content="https://aavillaverde97-png.github.io/simulador-prestamos-uy/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebApplication","@id":"https://aavillaverde97-png.github.io/simulador-prestamos-uy/#app",
+ "name":"Simulador de Préstamos Uruguay","url":"https://aavillaverde97-png.github.io/simulador-prestamos-uy/",
+ "applicationCategory":"FinanceApplication","operatingSystem":"Web","inLanguage":"es-UY",
+ "areaServed":{"@type":"Country","name":"Uruguay"},
+ "offers":{"@type":"Offer","price":"0","priceCurrency":"UYU"},
+ "description":"Calculadora de préstamos en dólares y pesos uruguayos con sistema francés, alemán y americano, cronograma de pagos y costo financiero total (CFT) incluyendo comisión, IVA y seguro.",
+ "featureList":["Sistema francés, alemán y americano","Préstamos en USD y en pesos uruguayos","Costo financiero total con comisión, IVA y seguro","Cronograma de pagos completo","Ingreso mínimo requerido","Comparación de plazos"],
+ "dateModified":"2026-10-08"},
+{"@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"¿Cómo se calcula la cuota de un préstamo en el sistema francés?","acceptedAnswer":{"@type":"Answer","text":"La cuota fija es C = P·i / (1 − (1+i)^−n), donde P es el capital adeudado, n la cantidad de cuotas e i la tasa mensual equivalente a la TEA: i = (1+TEA)^(1/12) − 1. A esa cuota se le suman el seguro y, si corresponde, el IVA sobre los intereses."}},
+ {"@type":"Question","name":"¿Qué diferencia hay entre la TEA y el costo financiero total?","acceptedAnswer":{"@type":"Answer","text":"La TEA mide solo el interés. El costo financiero total (CFT) es la tasa anual que iguala el dinero que realmente recibís con todo lo que pagás, incluyendo comisión de otorgamiento, IVA y seguro. Por ejemplo, USD 10.000 a 30 meses con TEA 8%, comisión 2,5% + IVA financiada y seguro de USD 7,50 por mes tiene un CFT cercano a 12,4% anual."}},
+ {"@type":"Question","name":"¿Conviene el sistema francés o el alemán?","acceptedAnswer":{"@type":"Answer","text":"Con la misma tasa y plazo, el sistema alemán paga menos intereses en total porque amortiza más capital al principio, pero su primera cuota es más alta. El francés tiene cuota fija y es más fácil de presupuestar. El simulador muestra los dos lado a lado para tu caso."}},
+ {"@type":"Question","name":"¿Cuánto tengo que ganar para que me aprueben un préstamo?","acceptedAnswer":{"@type":"Answer","text":"Cada entidad fija qué porcentaje del ingreso líquido puede ocupar la cuota. El simulador divide la cuota en pesos por ese porcentaje para estimar el ingreso mínimo; ajustá el porcentaje al que te indique tu banco o financiera."}},
+ {"@type":"Question","name":"¿El simulador sirve para préstamos en pesos y en dólares?","acceptedAnswer":{"@type":"Answer","text":"Sí. Elegí la moneda arriba. En dólares, la cuota se convierte a pesos uruguayos con la cotización que ingreses para estimar el ingreso requerido."}}
+]}
+]}
+</script>
+<style>
+:root{
+  --bg:#f3f5f4; --surface:#ffffff; --fg:#14201c; --muted:#5a6863; --line:#dbe2df;
+  --accent:#0b6b50; --accent-soft:#dff0e9; --hl:#fff4d6; --warn:#a4372a;
+  --font-body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-num:ui-monospace,'SF Mono','Cascadia Mono',Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1714; --surface:#16211d; --fg:#e6efeb; --muted:#9aaaa4; --line:#2a3a34;
+  --accent:#5fd0a6; --accent-soft:#1c3a2f; --hl:#3a3216; --warn:#ff8f80; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1714; --surface:#16211d; --fg:#e6efeb; --muted:#9aaaa4; --line:#2a3a34;
+  --accent:#5fd0a6; --accent-soft:#1c3a2f; --hl:#3a3216; --warn:#ff8f80; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.5;
+  padding:20px 16px 40px}
+.wrap{max-width:900px;margin:0 auto;display:grid;gap:16px}
+h1{font-size:1.5rem;margin:0;font-weight:650;text-wrap:balance;line-height:1.2}
+h2{font-size:1.1rem;margin:0 0 8px}
+h3{font-size:.98rem;margin:16px 0 4px}
+.sub{color:var(--muted);margin:4px 0 0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+.lbl{font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.rate{display:grid;gap:6px;margin-bottom:16px}
+.rate-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.rate-big{font-family:var(--font-num);font-size:2rem;font-weight:600;color:var(--accent);min-width:6ch}
+input[type=range]{flex:1;min-width:160px;accent-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.f{display:grid;gap:4px;min-width:0}
+input[type=number]{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:6px;
+  background:var(--bg);color:var(--fg);font-family:var(--font-num);font-size:.95rem}
+input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.seg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:16px}
+.seg label{position:relative;cursor:pointer;min-width:0}
+.seg input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.seg span{display:grid;gap:2px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-weight:600;background:var(--bg)}
+.seg small{font-weight:400;color:var(--muted);font-size:.76rem}
+.seg input:checked+span{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.seg input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.checks{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px}
+.checks label{display:flex;gap:8px;align-items:center;cursor:pointer}
+.checks input{accent-color:var(--accent);width:16px;height:16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.kpi{padding:12px;border-radius:8px;background:var(--accent-soft);min-width:0}
+.kpi b{display:block;font-family:var(--font-num);font-size:1.25rem;font-weight:600;overflow-wrap:anywhere}
+.kpi.cft{background:var(--hl)}
+.kpi small{color:var(--muted);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+#plazos table{min-width:600px}
+th{font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:right;
+  padding:8px 10px;border-bottom:1px solid var(--line);font-weight:500}
+th:first-child,td:first-child{text-align:left}
+td{padding:7px 10px;text-align:right;font-family:var(--font-num);font-size:.88rem;border-bottom:1px solid var(--line)}
+td:first-child{font-family:var(--font-body)}
+#plazos tbody tr{cursor:pointer}
+#plazos tbody tr:hover td{background:var(--accent-soft)}
+tr.sel td,tr.sel:hover td{background:var(--hl)!important;font-weight:600}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.cmp div{border:1px solid var(--line);border-radius:8px;padding:12px}
+.cmp div.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.cmp dl{margin:6px 0 0;display:grid;grid-template-columns:auto auto;gap:2px 10px;font-size:.88rem}
+.cmp dd{margin:0;text-align:right;font-family:var(--font-num)}
+.cmp dt{color:var(--muted)}
+details summary{cursor:pointer;font-weight:600}
+#crono{max-height:420px;overflow:auto;margin-top:10px}
+#crono table{min-width:640px}
+#crono thead th{position:sticky;top:0;background:var(--surface)}
+.note{color:var(--muted);font-size:.82rem}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+button{font:inherit;padding:8px 14px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+button.ghost{background:transparent;color:var(--accent)}
+article p,article li{max-width:70ch}
+code{font-family:var(--font-num);font-size:.88em;background:var(--accent-soft);padding:1px 4px;border-radius:4px}
+footer{color:var(--muted);font-size:.8rem;text-align:center}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <h1>Simulador de préstamos en Uruguay</h1>
+    <p class="sub">Calculá la cuota y el <strong>costo real</strong> de un préstamo automotor o personal, en dólares o pesos, con comisión, IVA y seguro incluidos.</p>
+  </header>
+
+  <section class="panel" aria-label="Datos del préstamo">
+    <div class="seg" role="radiogroup" aria-label="Moneda">
+      <label><input type="radio" name="cur" value="USD" checked><span>Dólares (USD)<small>automotor, vivienda</small></span></label>
+      <label><input type="radio" name="cur" value="UYU"><span>Pesos ($U)<small>consumo, personal</small></span></label>
+    </div>
+    <div class="rate">
+      <label class="lbl" for="tea">T.E.A. – tasa efectiva anual</label>
+      <div class="rate-row">
+        <output class="rate-big" id="teaOut" for="tea">8,00%</output>
+        <input type="range" id="tea" min="0" max="80" step="0.05" value="8">
+        <div class="f" style="width:110px"><input type="number" id="teaNum" min="0" max="200" step="0.05" value="8" aria-label="T.E.A. en número"></div>
+      </div>
+    </div>
+    <div class="seg" role="radiogroup" aria-label="Sistema de amortización">
+      <label><input type="radio" name="sys" value="fr" checked><span>Francés<small>cuota fija</small></span></label>
+      <label><input type="radio" name="sys" value="al"><span>Alemán<small>capital fijo, cuota decrece</small></span></label>
+      <label><input type="radio" name="sys" value="am"><span>Americano<small>interés mensual, capital al final</small></span></label>
+    </div>
+    <div class="grid">
+      <label class="f"><span class="lbl">Monto (<i class="cur">USD</i>)</span><input type="number" id="cap" value="10000" min="0" step="100"></label>
+      <label class="f"><span class="lbl">Cuotas (meses)</span><input type="number" id="n" value="30" min="1" max="360" step="1"></label>
+      <label class="f"><span class="lbl">Comisión %</span><input type="number" id="com" value="2.5" min="0" step="0.1"></label>
+      <label class="f"><span class="lbl">IVA %</span><input type="number" id="iva" value="22" min="0" step="1"></label>
+      <label class="f"><span class="lbl">Seguro mensual (<i class="cur">USD</i>)</span><input type="number" id="seg" value="7.5" min="0" step="0.1"></label>
+      <label class="f usd-only"><span class="lbl">Cotización USD ($U)</span><input type="number" id="fx" value="41.36" min="0" step="0.01"></label>
+      <label class="f"><span class="lbl">Cuota / ingreso %</span><input type="number" id="inc" value="15" min="1" max="100" step="1"></label>
+    </div>
+    <div class="checks">
+      <label><input type="checkbox" id="comFin" checked> Comisión financiada en las cuotas</label>
+      <label><input type="checkbox" id="ivaInt"> Cobran IVA sobre los intereses</label>
+    </div>
+  </section>
+
+  <section class="kpis" id="kpis" aria-live="polite"></section>
+
+  <section class="panel">
+    <h2>Mismo préstamo en los tres sistemas</h2>
+    <div class="cmp" id="cmp"></div>
+  </section>
+
+  <section class="panel" id="plazos">
+    <h2>Comparar plazos</h2>
+    <div class="tw"><table>
+      <thead><tr><th>Plazo</th><th>1ª cuota</th><th>Última cuota</th><th>Total a pagar</th><th>Costo total</th><th>CFT anual</th><th class="usd-only">1ª cuota $U</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+    <p class="note">Tocá una fila para elegir ese plazo.</p>
+  </section>
+
+  <section class="panel">
+    <details id="det">
+      <summary>Ver cronograma de pagos completo</summary>
+      <div id="crono"></div>
+    </details>
+    <div class="row" style="margin-top:12px">
+      <button type="button" id="share">Copiar enlace a esta simulación</button>
+      <button type="button" class="ghost" id="csv">Descargar cronograma (CSV)</button>
+      <span class="note" id="shareMsg" role="status"></span>
+    </div>
+  </section>
+
+  <article class="panel">
+    <h2>Cómo leer los resultados</h2>
+    <p><strong>La TEA no es lo que te cuesta el préstamo.</strong> La tasa efectiva anual mide solo el interés. Si además pagás comisión de otorgamiento (con su IVA) y un seguro mensual, el costo real es más alto. Por eso el simulador calcula el <strong>costo financiero total (CFT)</strong>: la tasa anual que iguala lo que recibís con todo lo que pagás.</p>
+    <p>Ejemplo: USD 10.000 a 30 cuotas, TEA 8%, comisión 2,5% + IVA financiada y seguro de USD 7,50 por mes. La cuota francesa queda en USD 386,32 y el CFT da <strong>12,4% anual</strong>, más de cuatro puntos por encima de la tasa publicada.</p>
+
+    <h3>Sistema francés</h3>
+    <p>Cuota fija durante todo el préstamo. Al principio la mayor parte es interés y al final es capital. La cuota se calcula como <code>C = P·i / (1 − (1+i)<sup>−n</sup>)</code>, con <code>i = (1+TEA)<sup>1/12</sup> − 1</code>.</p>
+    <h3>Sistema alemán</h3>
+    <p>Se devuelve la misma porción de capital cada mes (<code>P/n</code>) más el interés sobre el saldo. La primera cuota es la más alta y va bajando. En total pagás menos intereses que en el francés.</p>
+    <h3>Sistema americano</h3>
+    <p>Cada mes pagás solo el interés (y el seguro), y el capital entero se devuelve en la última cuota. Es el que más intereses acumula.</p>
+    <h3>Ingreso requerido</h3>
+    <p>Bancos y financieras limitan qué parte de tu ingreso líquido puede ocupar la cuota. El simulador divide la primera cuota en pesos por ese porcentaje. Cada entidad usa su propio límite, así que ajustalo al que te indiquen.</p>
+
+    <h2 style="margin-top:20px">Preguntas frecuentes</h2>
+    <h3>¿Cómo paso la TEA a tasa mensual?</h3>
+    <p>Con la fórmula de tasas equivalentes: <code>i = (1+TEA)<sup>1/12</sup> − 1</code>. Una TEA de 8% equivale a 0,643% mensual, no a 8/12 = 0,667%.</p>
+    <h3>¿Qué es el costo financiero total (CFT)?</h3>
+    <p>Es la tasa interna de retorno anualizada de tus pagos: considera el monto que efectivamente recibís, todas las cuotas, la comisión, el IVA y el seguro. Sirve para comparar ofertas de distintas entidades aunque tengan cargos diferentes.</p>
+    <h3>¿Conviene el sistema francés o el alemán?</h3>
+    <p>Si podés pagar una primera cuota más alta, el alemán sale más barato en total. Si preferís una cuota estable, el francés. Mirá el bloque “Mismo préstamo en los tres sistemas” para ver la diferencia en tu caso.</p>
+    <h3>¿Se cobra IVA sobre los intereses?</h3>
+    <p>Depende del tipo de préstamo y de la entidad. Si tu oferta dice “TEA + IVA” o el detalle de la cuota muestra IVA, activá la opción “Cobran IVA sobre los intereses”.</p>
+    <h3>¿La comisión se paga aparte o va en la cuota?</h3>
+    <p>Algunas entidades la descuentan del monto o la cobran al firmar; otras la suman al capital. Cuando no está financiada, recibís menos dinero y el CFT lo refleja.</p>
+    <p class="note">Simulación orientativa. No somos una entidad financiera: las condiciones reales (tasa, seguros, gastos y aprobación) las define cada banco o financiera. Última actualización: 8 de octubre de 2026.</p>
+  </article>
+
+  <footer>Simulador de préstamos Uruguay · cálculo hecho en tu navegador, no se guarda ningún dato.</footer>
+</main>
+
+<script src="calc.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const fmt=(v,d=2)=>isFinite(v)?v.toLocaleString('es-UY',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';
+const num=id=>{const v=parseFloat($(id).value);return isFinite(v)&&v>=0?v:0};
+const radio=name=>document.querySelector(`input[name=${name}]:checked`).value;
+const SYS={fr:'Francés',al:'Alemán',am:'Americano'};
+const FIELDS=['tea','cap','n','com','iva','seg','fx','inc'];
+const PLAZOS=[6,12,18,24,30,36,48,60,72,84,120,180,240];
+let last=null;
+
+function opts(n){
+  return {cap:num('cap'),tea:num('tea'),n,sys:radio('sys'),com:num('com'),iva:num('iva'),seg:num('seg'),
+    ivaInt:$('ivaInt').checked,comFin:$('comFin').checked};
+}
+
+function render(){
+  const cur=radio('cur'), usd=cur==='USD', fx=num('fx'), inc=num('inc')||15;
+  const n=Math.min(360,Math.max(1,Math.round(num('n'))||1));
+  const toUYU=v=>usd?v*fx:v;
+  document.querySelectorAll('.cur').forEach(e=>e.textContent=cur==='USD'?'USD':'$U');
+  document.querySelectorAll('.usd-only').forEach(e=>e.classList.toggle('hide',!usd));
+  $('teaOut').textContent=fmt(num('tea'))+'%';
+
+  const o=opts(n), s=Calc.schedule(o); last={s,cur};
+  const c1=toUYU(s.first);
+  $('kpis').innerHTML=`
+    <div class="kpi"><small>${SYS[o.sys]} · 1ª cuota (${n} m.)</small><b>${cur} ${fmt(s.first)}</b></div>
+    <div class="kpi"><small>Última cuota</small><b>${cur} ${fmt(s.last)}</b></div>
+    <div class="kpi cft"><small>Costo financiero total</small><b>${fmt(s.cft)}% anual</b></div>
+    <div class="kpi"><small>Costo total sobre el monto</small><b>${cur} ${fmt(s.costo)}</b></div>
+    ${usd?`<div class="kpi"><small>1ª cuota en pesos</small><b>$U ${fmt(c1,0)}</b></div>`:''}
+    <div class="kpi"><small>Ingreso líquido requerido</small><b>$U ${fmt(c1/(inc/100),0)}</b></div>
+    ${o.comFin?'':`<div class="kpi"><small>Recibís en mano</small><b>${cur} ${fmt(o.cap-s.upfront)}</b></div>`}`;
+
+  $('cmp').innerHTML=['fr','al','am'].map(k=>{
+    const x=Calc.schedule({...o,sys:k});
+    return `<div class="${k===o.sys?'on':''}"><strong>${SYS[k]}</strong><dl>
+      <dt>1ª cuota</dt><dd>${fmt(x.first)}</dd><dt>Última cuota</dt><dd>${fmt(x.last)}</dd>
+      <dt>Intereses</dt><dd>${fmt(x.interest)}</dd><dt>Total a pagar</dt><dd>${fmt(x.total)}</dd>
+      <dt>CFT anual</dt><dd>${fmt(x.cft)}%</dd></dl></div>`;
+  }).join('');
+
+  const list=[...new Set([...PLAZOS.filter(p=>p<=Math.max(84,n)),n])].sort((a,b)=>a-b);
+  $('rows').innerHTML=list.map(p=>{
+    const x=Calc.schedule({...o,n:p});
+    return `<tr data-n="${p}" class="${p===n?'sel':''}"><td>${p} cuotas</td><td>${fmt(x.first)}</td><td>${fmt(x.last)}</td>
+      <td>${fmt(x.total)}</td><td>${fmt(x.costo)}</td><td>${fmt(x.cft)}%</td>${usd?`<td>${fmt(x.first*fx,0)}</td>`:''}</tr>`;
+  }).join('');
+
+  if($('det').open) renderCrono();
+  saveUrl();
+}
+
+function renderCrono(){
+  const {s}=last;
+  $('crono').innerHTML=`<table><thead><tr><th>Mes</th><th>Saldo</th><th>Interés</th><th>IVA int.</th><th>Capital</th><th>Seguro</th><th>Cuota</th></tr></thead><tbody>${
+    s.rows.map(r=>`<tr><td>${r.k}</td><td>${fmt(r.bal)}</td><td>${fmt(r.int)}</td><td>${fmt(r.ivaI)}</td><td>${fmt(r.amort)}</td><td>${fmt(r.seg)}</td><td>${fmt(r.cuota)}</td></tr>`).join('')
+  }</tbody></table>`;
+}
+
+// El estado viaja en el enlace para poder compartir la simulación (solo números, nada personal)
+function saveUrl(){
+  const q=new URLSearchParams();
+  FIELDS.forEach(f=>q.set(f,$(f).value));
+  q.set('cur',radio('cur'));q.set('sys',radio('sys'));
+  q.set('cf',$('comFin').checked?1:0);q.set('ii',$('ivaInt').checked?1:0);
+  try{history.replaceState(null,'','?'+q)}catch(e){}
+}
+function loadUrl(){
+  const q=new URLSearchParams(location.search);
+  FIELDS.forEach(f=>{if(q.has(f))$(f).value=q.get(f)});
+  $('teaNum').value=$('tea').value;
+  ['cur','sys'].forEach(k=>{const el=document.querySelector(`input[name=${k}][value="${q.get(k)}"]`);if(el)el.checked=true});
+  if(q.has('cf'))$('comFin').checked=q.get('cf')==='1';
+  if(q.has('ii'))$('ivaInt').checked=q.get('ii')==='1';
+}
+
+$('tea').addEventListener('input',e=>{$('teaNum').value=e.target.value;render()});
+$('teaNum').addEventListener('input',e=>{$('tea').value=e.target.value;render()});
+FIELDS.filter(f=>f!=='tea').forEach(f=>$(f).addEventListener('input',render));
+document.querySelectorAll('input[name=sys],#comFin,#ivaInt').forEach(el=>el.addEventListener('change',render));
+document.querySelectorAll('input[name=cur]').forEach(el=>el.addEventListener('change',()=>{
+  // valores de partida razonables al cambiar de moneda
+  if(radio('cur')==='UYU'){$('cap').value=300000;$('seg').value=0;$('tea').value=$('teaNum').value=35;$('n').value=24}
+  else{$('cap').value=10000;$('seg').value=7.5;$('tea').value=$('teaNum').value=8;$('n').value=30}
+  render();
+}));
+$('rows').addEventListener('click',e=>{const tr=e.target.closest('tr');if(tr){$('n').value=tr.dataset.n;render()}});
+$('det').addEventListener('toggle',()=>{if($('det').open)renderCrono()});
+$('share').addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(location.href);$('shareMsg').textContent='Enlace copiado.'}
+  catch(e){$('shareMsg').textContent='Copiá el enlace de la barra de direcciones.'}
+});
+$('csv').addEventListener('click',()=>{
+  const {s,cur}=last, f=v=>v.toFixed(2);
+  const lines=['mes;saldo;interes;iva_interes;capital;seguro;cuota ('+cur+')',
+    ...s.rows.map(r=>[r.k,f(r.bal),f(r.int),f(r.ivaI),f(r.amort),f(r.seg),f(r.cuota)].join(';'))];
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob(['﻿'+lines.join('\n')],{type:'text/csv'}));
+  a.download='cronograma-prestamo.csv';a.click();URL.revokeObjectURL(a.href);
+});
+loadUrl();render();
+</script>
+</body>
+</html>

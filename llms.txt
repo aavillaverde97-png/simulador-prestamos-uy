@@ -1,0 +1,22 @@
+# Simulador de Préstamos Uruguay
+
+> Calculadora gratuita de préstamos para Uruguay, en dólares (USD) o pesos uruguayos ($U). Calcula la cuota mensual, el cronograma de pagos y el costo financiero total (CFT) incluyendo comisión de otorgamiento con IVA, IVA sobre intereses opcional y seguro mensual. Soporta sistema francés, alemán y americano.
+
+- URL: https://aavillaverde97-png.github.io/simulador-prestamos-uy/
+- Idioma: español (Uruguay)
+- Todo el cálculo ocurre en el navegador; no pide datos personales ni registro.
+
+## Método
+- Tasa mensual equivalente: i = (1+TEA)^(1/12) − 1
+- Francés: cuota C = P·i / (1 − (1+i)^−n)
+- Alemán: amortización P/n más interés sobre saldo
+- Americano: solo interés mensual, capital en la última cuota
+- CFT: TIR mensual de (monto recibido, cuotas totales) anualizada como (1+TIR)^12 − 1
+- Ingreso requerido: primera cuota en pesos ÷ porcentaje cuota/ingreso
+
+## Ejemplo de referencia
+USD 10.000, 30 cuotas, TEA 8%, comisión 2,5% + IVA 22% financiada, seguro USD 7,50/mes, sistema francés: cuota USD 386,32; total pagado USD 11.589,53; CFT ≈ 12,4% anual.
+
+## Enlaces compartibles
+Parámetros de URL: tea, cap, n, com, iva, seg, fx, inc, cur (USD|UYU), sys (fr|al|am), cf (comisión financiada 0|1), ii (IVA sobre intereses 0|1).
+Ejemplo: https://aavillaverde97-png.github.io/simulador-prestamos-uy/?cur=USD&cap=15000&tea=9&n=36&sys=fr
